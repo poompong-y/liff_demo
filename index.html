@@ -37,21 +37,35 @@
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button>
 
-  <script src="js/vconsole.min.js"></script>
-  <script>
+  <!-- <script src="js/vconsole.min.js"></script> -->
+  <!-- <script>
     var vConsole = new VConsole()
     console.log("Hello World!")
-  </script>
+  </script> -->
 
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     function createUniversalLink() {
+      const link1 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink1").append(link1)
+
+      liff.permanentLink.setExtraQueryParam("param=9")
+      const link2 = liff.permanentLink.append(link2)
+      document.getElementById("universalLink2").append(link2)
     }
 
     async function shareMsg() {
+      await liff.shareTargetPicker([
+        {
+          "type" : "text",
+          "text" : "This message was sent  by ShareTargetPicker"
+        }
+      ])
     }
 
     function logOut() {
+      liff.logOut()
+      window.location.reload()
     }
 
     function closed() {
@@ -126,7 +140,7 @@
         getUserProfile()
         getContext()
       // getFriendship()
-      // createUniversalLink()
+        createUniversalLink()
       } else {
         liff.login()
       }
